@@ -51,6 +51,9 @@ SlideGallery(views, height: 400, tintColor: .blue)
 ## Example
 
 ```swift
+import SwiftUI
+import SlideGallery
+
 struct ContentView: View {
     
     let views = [AnyView(View1()), AnyView(View2()), AnyView(View3())]
