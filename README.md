@@ -15,7 +15,7 @@ A SwiftUI sliding gallery that can display views of any type.
 
 ### For Xcode Projects
 
-File > Swift Packages > Add Package Dependency: https://github.com/nbrandes/SlideGallery
+File > Add Package Dependencies > Enter Package URL: https://github.com/nbrandes/SlideGallery
 
 ### For Swift Packages
 
