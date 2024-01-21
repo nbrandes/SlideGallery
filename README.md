@@ -19,7 +19,7 @@ File > Swift Packages > Add Package Dependency: https://github.com/nbrandes/Slid
 
 ### For Swift Packages
 
-Add a dependency in your your `Package.swift`
+Add a dependency in your `Package.swift`
 
 ```swift
 .package(url: "https://github.com/nbrandes/SlideGallery.git"),
