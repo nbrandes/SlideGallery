@@ -1,6 +1,6 @@
 # SwiftUI SlideGallery
 
-A SwiftUI sliding gallery that can display views of any type.
+A sliding gallery that can display views of any type, for SwiftUI.
 
 <img src=https://raw.githubusercontent.com/nbrandes/SlideGallery/main/Docs/Media/slidegallery.gif width=300 align="right" />
 
@@ -27,7 +27,7 @@ Add a dependency in your `Package.swift`
 
 ## Usage
 
-Initialize SlideGallery with an array of views
+Initialize `SlideGallery` with an array of views
 
 ```swift
 SlideGallery(views)
@@ -35,17 +35,17 @@ SlideGallery(views)
 
 ## Parameters
 
-SlideGallery can be initialized with the following parameters
+`SlideGallery` can be initialized with the following parameters
 
 Required:
-* `views: [AnyView]` - An array of views to display
+`views: [AnyView]` - An array of views to display
 
 Optional:
-* `height: CGFloat` - Height of the gallery
-* `tintColor: Color` - Color used to tint the controls
-
+`height: CGFloat` - (Default 400) - Height of the gallery
+`controlColor: Color` - (Default .red)- Color used to tint the controls
+`autoScroll: Bool` - (Deafault false) - Enable/Disable Autoscrolling
 ```swift
-SlideGallery(views, height: 400, tintColor: .blue)
+SlideGallery(views, height: 400, controlColor: .red, autoScroll: true)
 ```
 
 ## Example
@@ -54,18 +54,27 @@ SlideGallery(views, height: 400, tintColor: .blue)
 import SwiftUI
 import SlideGallery
 
+let url1 = "https://cdn.pixabay.com/photo/2019/01/25/11/18/girl-3954232_1280.jpg"
+let url2 = "https://media.istockphoto.com/id/505872798/photo/portrait-of-beautiful-girl-at-night.jpg?s=1024x1024&w=is&k=20&c=ERkdHgXzBQqhCx6C0D5WmEjbFcETV-xx2rtWX25rT50="
+let url3 = "https://media.istockphoto.com/id/1330558678/photo/kabukicho-shinjuku-at-night.jpg?s=1024x1024&w=is&k=20&c=hVrI4ULidUBMzIBypa22-OvcTcFlmPu9xlXWHPD19b8="
+
 struct ContentView: View {
-    
-    let views = [AnyView(View1()), AnyView(View2()), AnyView(View3())]
-    
+    let views = [
+        AnyView(ImageView(url: url1)),
+        AnyView(ImageView(url: url2)),
+        AnyView(ImageView(url: url3)),
+        AnyView(CustomView()),
+        AnyView(ListView()),
+    ]
     var body: some View {
-        SlideGallery(views)
+        SlideGallery(views, controlColor: .blue, autoScroll: true)
     }
 }
 
-struct View1: View {
+struct ImageView: View {
+    var url: String
     var body: some View {
-        AsyncImage(url: URL(string: "https://cdn.pixabay.com/photo/2019/01/25/11/18/girl-3954232_1280.jpg")){ image in
+        AsyncImage(url: URL(string: url)){ image in
             image.image?
                 .resizable()
                 .clipShape(RoundedRectangle(cornerRadius: 25.0))
@@ -75,26 +84,25 @@ struct View1: View {
     }
 }
 
-struct View2: View {
+struct CustomView: View {
     var body: some View {
-        AsyncImage(url: URL(string: "https://media.istockphoto.com/id/505872798/photo/portrait-of-beautiful-girl-at-night.jpg?s=1024x1024&w=is&k=20&c=ERkdHgXzBQqhCx6C0D5WmEjbFcETV-xx2rtWX25rT50=")){ image in
-            image.image?
-                .resizable()
-                .clipShape(RoundedRectangle(cornerRadius: 25.0))
-                .scaledToFit()
-                .clipped()
+        VStack(spacing: 20) {
+            Circle()
+                .foregroundColor(.gray)
+            Button("Sign Up") {
+                //Do something
+            }
+            .buttonStyle(.borderedProminent)
         }
     }
 }
 
-struct View3: View {
+struct ListView: View {
     var body: some View {
-        AsyncImage(url: URL(string: "https://media.istockphoto.com/id/1330558678/photo/kabukicho-shinjuku-at-night.jpg?s=1024x1024&w=is&k=20&c=hVrI4ULidUBMzIBypa22-OvcTcFlmPu9xlXWHPD19b8=")) { image in
-            image.image?
-                .resizable()
-                .clipShape(RoundedRectangle(cornerRadius: 25.0))
-                .scaledToFit()
-                .clipped()
+        List {
+            Text("Item 1")
+            Text("Item 2")
+            Text("Item 3")
         }
     }
 }

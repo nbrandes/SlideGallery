@@ -12,11 +12,17 @@ public struct SlideGallery: View {
     @State var views: [AnyView]
     var tintColor: Color
     var height: CGFloat
+    var autoScroll: Bool
+    let timer = Timer.publish(every: 3.0, on: .main, in: .common).autoconnect()
     
-    public init(_ views: [AnyView], height: CGFloat = 400, tintColor: Color = .red) {
+    public init(_ views: [AnyView],
+                height: CGFloat = 400,
+                controlColor: Color = .red,
+                autoScroll: Bool = false) {
         self.views = views
         self.height = height
-        self.tintColor = tintColor
+        self.tintColor = controlColor
+        self.autoScroll = autoScroll
     }
     
     public var body: some View {
@@ -33,10 +39,8 @@ public struct SlideGallery: View {
                             }.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
                         )
                 }
-                
-                
             }
-            .frame(height: 400)
+            .frame(height: height)
             .gesture(
                 DragGesture()
                     .onEnded { gesture in
@@ -91,6 +95,13 @@ public struct SlideGallery: View {
                 }
             }
             .padding(.top, 10)
+        }
+        .onReceive(timer) { _ in
+            if autoScroll {
+                withAnimation {
+                    currentIndex = (currentIndex + 1) % views.count
+                }
+            }
         }
         .frame(height: height)
     }
