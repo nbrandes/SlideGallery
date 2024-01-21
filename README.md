@@ -40,9 +40,9 @@ SlideGallery(views)
 Required:
 `views: [AnyView]` - An array of views to display
 
-Optional:
-`height: CGFloat` - (Default 400) - Height of the gallery
-`controlColor: Color` - (Default .red)- Color used to tint the controls
+Optional: \
+`height: CGFloat` - (Default 400) - Height of the gallery \
+`controlColor: Color` - (Default .red)- Color used to tint the controls \
 `autoScroll: Bool` - (Deafault false) - Enable/Disable Autoscrolling
 ```swift
 SlideGallery(views, height: 400, controlColor: .red, autoScroll: true)
