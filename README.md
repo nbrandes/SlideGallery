@@ -43,7 +43,7 @@ Required:
 Optional: \
 `height: CGFloat` - (Default 400) - height of the gallery \
 `color: Color` - (Default .blue)- color used to tint the controls \
-`scroll: Bool` - (Deafault false) - enable/disable auto scrolling
+`scroll: Bool` - (Default false) - enable/disable auto scrolling
 ```swift
 SlideGallery(views, height: 400, color: .red, scroll: true)
 ```
