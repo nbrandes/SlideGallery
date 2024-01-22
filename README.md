@@ -41,11 +41,11 @@ Required:
 `views: [AnyView]` - An array of views to display
 
 Optional: \
-`height: CGFloat` - (Default 400) - Height of the gallery \
-`controlColor: Color` - (Default .red)- Color used to tint the controls \
-`autoScroll: Bool` - (Deafault false) - Enable/Disable Autoscrolling
+`height: CGFloat` - (Default 400) - height of the gallery \
+`color: Color` - (Default .blue)- color used to tint the controls \
+`scroll: Bool` - (Deafault false) - enable/disable auto scrolling
 ```swift
-SlideGallery(views, height: 400, controlColor: .red, autoScroll: true)
+SlideGallery(views, height: 400, color: .red, scroll: true)
 ```
 
 ## Example
@@ -67,7 +67,7 @@ struct ContentView: View {
         AnyView(ListView()),
     ]
     var body: some View {
-        SlideGallery(views, controlColor: .blue, autoScroll: true)
+        SlideGallery(views, color: .red, scroll: true)
     }
 }
 

@@ -10,19 +10,19 @@ import SwiftUI
 public struct SlideGallery: View {
     @State var currentIndex: Int = 0
     @State var views: [AnyView]
-    var tintColor: Color
+    var color: Color
     var height: CGFloat
-    var autoScroll: Bool
+    var scroll: Bool
     let timer = Timer.publish(every: 3.0, on: .main, in: .common).autoconnect()
     
     public init(_ views: [AnyView],
                 height: CGFloat = 400,
-                controlColor: Color = .red,
-                autoScroll: Bool = false) {
+                color: Color = .blue,
+                scroll: Bool = false) {
         self.views = views
         self.height = height
-        self.tintColor = controlColor
-        self.autoScroll = autoScroll
+        self.color = color
+        self.scroll = scroll
     }
     
     public var body: some View {
@@ -63,7 +63,7 @@ public struct SlideGallery: View {
                 }) {
                     Image(systemName: "chevron.left")
                         .font(.largeTitle)
-                        .tint(tintColor)
+                        .tint(color)
                 }
                 .disabled(currentIndex == 0)
 
@@ -76,7 +76,7 @@ public struct SlideGallery: View {
                 }) {
                     Image(systemName: "chevron.right")
                         .font(.largeTitle)
-                        .tint(tintColor)
+                        .tint(color)
                 }
                 .disabled(currentIndex == views.count - 1)
             }
@@ -86,7 +86,7 @@ public struct SlideGallery: View {
                 ForEach(0..<views.count, id: \.self) { index in
                     Circle()
                         .frame(width: 10, height: 10)
-                        .foregroundColor(index == currentIndex ? tintColor : .gray)
+                        .foregroundColor(index == currentIndex ? color : .gray)
                         .onTapGesture {
                             withAnimation {
                                 currentIndex = index
@@ -97,7 +97,7 @@ public struct SlideGallery: View {
             .padding(.top, 10)
         }
         .onReceive(timer) { _ in
-            if autoScroll {
+            if scroll {
                 withAnimation {
                     currentIndex = (currentIndex + 1) % views.count
                 }
@@ -122,4 +122,3 @@ public struct SlideGallery: View {
         return CGFloat(offset) * UIScreen.main.bounds.width
     }
 }
-
